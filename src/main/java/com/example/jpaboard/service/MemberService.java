@@ -7,6 +7,8 @@ import com.example.jpaboard.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
@@ -35,5 +37,17 @@ public class MemberService {
         Member findMember = optionalMember.get();
 
         return new MemberResponseDto(findMember.getUserName(), findMember.getAge());
+    }
+
+    @Transactional
+    public void updatePassword(Long id, String oldPassword, String newPassword) {
+
+        Member findMember = memberRepository.findByIdOrElseThrow(id);
+
+        if (false == ObjectUtils.nullSafeEquals(findMember.getPassword(), oldPassword)) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Wrong password");
+        }
+
+        findMember.updatePassword(newPassword);
     }
 }
