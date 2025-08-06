@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: jpa-board
+  datasource:
+    url: jdbc:mysql://localhost:3306/board
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        use_sql_comments: true
