@@ -24,7 +24,7 @@ public class MemberService {
         Member member = new Member(username, password, age);
         Member savedMember = memberRepository.save(member);
 
-        return new SignUpResponseDto(savedMember.getId(), savedMember.getUserName(), savedMember.getAge());
+        return new SignUpResponseDto(savedMember.getId(), savedMember.getUsername(), savedMember.getAge());
     }
 
     public MemberResponseDto findById(Long id) {
@@ -36,7 +36,7 @@ public class MemberService {
 
         Member findMember = optionalMember.get();
 
-        return new MemberResponseDto(findMember.getUserName(), findMember.getAge());
+        return new MemberResponseDto(findMember.getUsername(), findMember.getAge());
     }
 
     @Transactional
